@@ -1,0 +1,1 @@
+{{ codegen.generate_model_yaml(['stablecoin_activity_per_day'], include_data_types=True) }}

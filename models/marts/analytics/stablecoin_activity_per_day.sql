@@ -2,10 +2,13 @@
 select
 date,
 token_address,
-{{ stable_conversion('value') }} as total_usd_value
+{{ stable_conv('value') }} as total_usd_value
 
 from {{ref('stg_token_transfers')}}
+--left join {{ ref('stablecoins')}} s
+--on t.token_address = s.contract_address
 
+--where s.contract_address is not null
 
 where lower(token_address) in ('0xdac17f958d2ee523a2206206994597c13d831ec7', '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48')
 
