@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - master
+      - dev2
 
 jobs:
   dbt-run:
