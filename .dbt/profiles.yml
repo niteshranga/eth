@@ -1,13 +1,13 @@
 eth:
   outputs:
     ci:
-      account: ROBERMK-SD63451
+      account: "{{ env_var(secrets.DBT_SNOWFLAKE_IDENTIFIER) }}"
       database: ci
       private_key_path: "{{ env_var('DBT_PRIVATE_KEY_PATH') }}"
-      role: ACCOUNTADMIN
+      role: "{{ env_var(secrets.DBT_SNOWFLAKE_ROLE) }}"
       schema: ci_schema
       threads: 1
       type: snowflake
-      user: NITESHRAN
+      user: "{{ env_var(secrets.DBT_SNOWFLAKE_USER) }}"
       warehouse: COMPUTE_WH
   target: dev
