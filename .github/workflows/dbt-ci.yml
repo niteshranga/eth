@@ -36,9 +36,6 @@ jobs:
           echo "$DBT_PRIVATE_KEY" > ~/.dbt/rsa_key.p8
           chmod 600 ~/.dbt/rsa_key.p8
 
-      - name: Install dbt deps
-        run: dbt deps
-
       - name: Run dbt debug
         run: dbt debug --target ci
 
