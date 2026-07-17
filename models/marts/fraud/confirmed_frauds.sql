@@ -1,4 +1,4 @@
---{{ config(group='fraud_risk', access='protected') }}
+{{ config(group='fraud_risk', access='protected') }}
 
 select
 *
