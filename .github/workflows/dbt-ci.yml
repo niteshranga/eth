@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # needed so we can assess master too
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -47,5 +49,29 @@ jobs:
       - name: Run dbt debug
         run: dbt debug --target ci
 
-      - name: Run dbt
-        run: dbt build --target ci
+      - name: create state manifest from master
+        run: |   # giving a command in several lines
+          mkdir -p state
+          git checkout master
+          dbt deps
+          dbt parse --target prod
+          cp target/manifest.json state/manifest.json 
+          git checkout - 
+
+      # --- clone incremental first ( so is_incremental() is true ) ---
+      - name: clone impacted incremental models into PR schema
+        run: |
+          dbt clone \
+            --target ci \
+            --state ./state \
+            --defer  \
+            --select "state:modified+,config.materialized:incremental,state:old"
+
+      # --- then slim build ---
+      - name: Slim build (modified + downstream)
+        run: |
+          dbt build \
+            --target ci \
+            --state ./state \
+            --defer  \
+            --select "state:modified+"
