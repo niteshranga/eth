@@ -22,3 +22,25 @@ models:
 
       - name: total_usd_value
         data_type: float
+
+    - name: transactions_enriched
+      columns:
+        - name: value
+          tests:
+          - generic_test_value_is_positive
+
+    - name: stablecoin_activity_per_day_v1
+      columns:
+        - name: type
+          data_type: varchar
+          data_tests:
+            - accepted_values:
+                values: ['Hybrid','Fiat-backed','Crypto-backed']
+
+    - name: stg_token_transfers
+      columns:
+        - name: transaction_hash
+          data_tests:
+            - relationships:
+                to: ref('stg_transactions')
+                field: hash
