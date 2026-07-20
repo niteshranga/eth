@@ -43,6 +43,12 @@ jobs:
           cp .dbt/profiles.yml ~/.dbt/profiles.yml
           echo "$DBT_PRIVATE_KEY" > ~/.dbt/rsa_key.p8
           chmod 600 ~/.dbt/rsa_key.p8
+          
+      - name: Download previous state
+        run: |
+          mkdir -p ./prod_state
+          # Download manifest from previous run (storage/artifact)
+          # For now, assume it exists or start fresh
 
       - name: dbt deps
         run: dbt deps --target prod
@@ -55,3 +61,9 @@ jobs:
 
       - name: dbt build (prod)
         run: dbt build --target prod -s state:modified+ --state ./prod_state
+
+      - name: Save state for next run
+        if: always()
+        run: |
+          mkdir -p ./prod_state
+          cp target/manifest.json ./prod_state/
