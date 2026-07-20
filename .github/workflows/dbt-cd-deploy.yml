@@ -42,8 +42,8 @@ jobs:
           mkdir -p ~/.dbt
           cp .dbt/profiles.yml ~/.dbt/profiles.yml
           echo "$DBT_PRIVATE_KEY" > ~/.dbt/rsa_key.p8
-          chmod 600 ~/.dbt/rsa_key.p8
-          
+          chmod 600 ~/.dbt/rsa_key.p8       
+
       - name: dbt deps
         run: dbt deps --target prod
 
@@ -54,4 +54,4 @@ jobs:
         run: dbt compile --target prod
 
       - name: dbt build (prod)
-        run: dbt build --target prod
+        run: dbt build --target prod 
