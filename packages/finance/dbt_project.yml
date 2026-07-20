@@ -1,5 +1,5 @@
 
-name: 'eth'
+name: 'finance'
 version: '1.0.0'
 
 profile: 'eth'
@@ -16,15 +16,6 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 models:
-  eth:
+  finance:
     +materialized: table
-    marts:
-        +tags:
-          - powerbi
-          - reports
-        +schema: marts
-
-    analytics:
-      stablecoin_activity_per_day:
-        +tags:
-          - reports
+    +schema: finance
