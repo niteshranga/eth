@@ -44,6 +44,12 @@ jobs:
           echo "$DBT_PRIVATE_KEY" > ~/.dbt/rsa_key.p8
           chmod 600 ~/.dbt/rsa_key.p8
 
+      - name: Download previous state
+        run: |
+          mkdir -p ./prod_state
+          # Download manifest from previous run (storage/artifact)
+          # For now, assume it exists or start fresh          
+
       - name: dbt deps
         run: dbt deps --target prod
 
