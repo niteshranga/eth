@@ -1,0 +1,1 @@
+select 1 as cust_id, ('Nike') as Cust_Name

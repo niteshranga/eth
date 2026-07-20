@@ -1,0 +1,1 @@
+select 2 as cust_id, ('Addidas') as Cust_Name
