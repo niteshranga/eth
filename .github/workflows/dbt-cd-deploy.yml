@@ -54,4 +54,4 @@ jobs:
         run: dbt compile --target prod
 
       - name: dbt build (prod)
-        run: dbt build --target prod 
+        run: dbt build --target prod -s state:modified+ --state ./prod_state
