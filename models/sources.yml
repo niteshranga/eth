@@ -9,3 +9,9 @@ sources:
       - name: token_transfers
       - name: transactions
       - name: contracts_clone
+
+  - name: airbnb
+    database: airbnb
+    schema: airbnb
+    tables:
+      - name: apartment_listings
