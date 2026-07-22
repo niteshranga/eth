@@ -12,6 +12,8 @@ sources:
       loaded_at_field: to_timestamp(date) # changed to config in v1.10    
     tables:
       - name: contracts
+        config:
+          event_time: date
       - name: token_transfers
       - name: transactions
       - name: contracts_clone
