@@ -2,6 +2,7 @@ version: 2
 
 models:
     - name: stg_transactions
+      description: "{{ doc('transactions') }}"
       columns:
         - name: hash
           description: this is a hash desc
