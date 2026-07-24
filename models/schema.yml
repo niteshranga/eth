@@ -45,3 +45,15 @@ models:
             - relationships:
                 to: ref('stg_transactions')
                 field: hash
+
+exposures:
+
+  - name: stablecoin_activity_per_day_v1
+    type: dashboard
+
+    depends_on:
+      - ref('stg_token_transfers')
+      - ref('stablecoins')
+    owner:
+      name: nit
+      email: nit@email.com                
