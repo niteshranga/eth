@@ -1,3 +1,4 @@
+{{ config(tags=['stablecoin'], grants = {'+select': ['ba']})}}
 
 select
 date,
