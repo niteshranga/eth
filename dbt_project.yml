@@ -21,10 +21,15 @@ models:
     marts:
         +tags:
           - powerbi
-          - reports
+          - reports  
         +schema: marts
 
-    analytics:
-      stablecoin_activity_per_day:
-        +tags:
-          - reports
+        analytics:
+         stablecoin_activity_per_day:
+           +post-hook:
+             - grant select on table DBT.DBT_NITESH_MARTS.stablecoin_activity_per_day to role ba
+             - grant usage on database dbt to role ba
+             - grant usage on schema DBT.DBT_NITESH_MARTS to role ba
+             - grant usage on warehouse compute_wh to role ba
+           +grants:
+             select: ['ba']   
